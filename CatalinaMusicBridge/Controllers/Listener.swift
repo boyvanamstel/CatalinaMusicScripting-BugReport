@@ -13,6 +13,8 @@ class Listener {
     // MARK: - Properties
     
     var didUpdatePlayerInfo: ((PlayerInfo) -> Void)?
+
+    private(set) var playerInfo = PlayerInfo(state: .unknown)
     
     // MARK: - Object lifecycle
     
@@ -34,8 +36,10 @@ class Listener {
                          selector: #selector(handlePlayerStateChange(_:)),
                          name: .iTunesPlayerInfo,
                          object: nil)
+
+        updatePlayerInfo()
     }
-    
+
     func stop() {
         guard isEnabled else { return }
         
@@ -46,32 +50,63 @@ class Listener {
     
     @objc private func handlePlayerStateChange(_ notification: Notification) {
         // Note: I'm aware we could use the player state from the `userInfo`, that's not the point of this example.
-//        let artist = notification.userInfo?["Artist"] as? String ?? ""
-//        let title = notification.userInfo?["Name"] as? String ?? ""
 
-        // Update player state through AppleScript
+        updatePlayerInfo()
+    }
+
+    private func updatePlayerInfo() {
+        let song = fetchSong()
+        let state = fetchPlayerState()
+        let playerInfo = PlayerInfo(state: state, artist: song.artist, title: song.title)
+        self.playerInfo = playerInfo
+
+        didUpdatePlayerInfo?(playerInfo)
+    }
+
+    // MARK: - Scripts
+
+    private func fetchSong() -> (artist: String?, title: String?) {
+        var error: NSDictionary?
         let source = """
-property trackName : \"\"
-property trackArtist : \"\"
-tell application \"Music\"
+property trackName : ""
+property trackArtist : ""
+tell application "Music"
 set trackName to name of current track
 set trackArtist to artist of current track
 end tell
 return {trackArtist, trackName}
 """
+
         let script = NSAppleScript(source: source)
-        var error: NSDictionary?
         guard let output = script?.executeAndReturnError(&error) else {
-            print("AppleScript error:\n\(error ?? [:])")
-            return
+            print("Track Info error:\n\(error ?? [:])")
+            return (nil, nil)
         }
-        
-        let artist = output.atIndex(1)?.stringValue ?? ""
-        let title = output.atIndex(2)?.stringValue ?? ""
 
-        let playerInfo = PlayerInfo(artist: artist, title: title)
+        let artist = output.atIndex(1)?.stringValue
+        let title = output.atIndex(2)?.stringValue
 
-        didUpdatePlayerInfo?(playerInfo)
+        return (artist: artist, title: title)
     }
     
+    private func fetchPlayerState() -> PlayerInfo.State {
+        var error: NSDictionary?
+        let source = """
+tell application "Music"
+player state
+end
+"""
+
+        let script = NSAppleScript(source: source)
+        guard let output = script?.executeAndReturnError(&error),
+            let stateString = output.stringValue else {
+            print("Player State error:\n\(error ?? [:])")
+            return .unknown
+        }
+
+        let state = PlayerInfo.State(rawValue: stateString) ?? .unknown
+
+        return state
+    }
+
 }

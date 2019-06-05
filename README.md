@@ -32,6 +32,8 @@ Only library information (`com.apple.iTunes.library.read`) seems to be affected.
 Notice the error that appears in the Console:
 ![Privilege violation error shown in the console](Screenshots/error.png)
 
+Also note that the player state _did_ update appropriately.
+
 3. Disable sandboxing in `CatalinaMusicBridge.entitlements`.
 
 ```

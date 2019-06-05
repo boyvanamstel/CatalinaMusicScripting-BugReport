@@ -16,6 +16,8 @@ struct ContentView : View {
             Text("Play a track in Music.app")
                 .font(.title)
             Text("\(viewModel.currentTrack)")
+            Text("State: \(viewModel.playerState)")
+                .font(.footnote)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }

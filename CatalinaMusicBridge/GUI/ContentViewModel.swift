@@ -17,8 +17,11 @@ class ContentViewModel: BindableObject {
     var currentTrack: String {
         return "\(playerInfo.artist) - \(playerInfo.title)"
     }
+    var playerState: String {
+        return "\(playerInfo.state)"
+    }
     
-    private var playerInfo = PlayerInfo(artist: "N/A", title: "N/A") {
+    private var playerInfo: PlayerInfo {
         didSet {
             didChange.send(self)
         }
@@ -30,6 +33,7 @@ class ContentViewModel: BindableObject {
 
     init(listener: Listener) {
         self.listener = listener
+        self.playerInfo = listener.playerInfo
         
         listener.didUpdatePlayerInfo = { self.playerInfo = $0 }
     }
