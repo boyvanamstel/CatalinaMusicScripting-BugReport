@@ -57,7 +57,7 @@ tell application \"Music\"
 set trackName to name of current track
 set trackArtist to artist of current track
 end tell
-return {trackName, trackArtist}
+return {trackArtist, trackName}
 """
         let script = NSAppleScript(source: source)
         var error: NSDictionary?

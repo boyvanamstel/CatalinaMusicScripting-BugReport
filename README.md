@@ -29,7 +29,7 @@ Only library information (`com.apple.iTunes.library.read`) seems to be affected.
 1. Access a song on Apple Music, load a local track or skip a track.
 2. Grant permission to CatalinaMusicBridge.app to access Music.app.
 
-Notice the error that appears in the Console.
+Notice the error that appears in the Console:
 ![Privilege violation error shown in the console](Screenshots/error.png)
 
 3. Disable sandboxing in `CatalinaMusicBridge.entitlements`.
@@ -42,5 +42,5 @@ Notice the error that appears in the Console.
 4. Run the project again.
 5. Skip a track in Music.app.
 
-Notice that the track information gets properly displayed.
+Notice that the track information gets properly displayed:
 ![A screenshot of the app window showing track information](Screenshots/track-info.png)
