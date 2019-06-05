@@ -12,27 +12,27 @@ import SwiftUI
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-    var window: NSWindow!
-
+    var window = NSWindow.main
+    private let listener = Listener()
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // Insert code here to initialize your application
-        window = NSWindow(
-            contentRect: NSRect(x: 0, y: 0, width: 480, height: 300),
-            styleMask: [.titled, .closable, .miniaturizable, .resizable, .fullSizeContentView],
-            backing: .buffered, defer: false)
+        listener.start()
+
+        let contentViewModel = ContentViewModel(listener: listener)
+        let contentView = ContentView().environmentObject(contentViewModel)
+        window.contentView = NSHostingView(rootView: contentView)
+
         window.center()
-        window.setFrameAutosaveName("Main Window")
-
-        window.contentView = NSHostingView(rootView: ContentView())
-
         window.makeKeyAndOrderFront(nil)
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
+        listener.stop()
     }
 
+    func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
+        return true
+    }
 
 }
 
