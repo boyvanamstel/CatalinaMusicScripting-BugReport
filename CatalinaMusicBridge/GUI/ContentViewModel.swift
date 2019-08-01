@@ -10,7 +10,10 @@ import SwiftUI
 import Combine
 
 class ContentViewModel: BindableObject {
-    var didChange = PassthroughSubject<ContentViewModel, Never>()
+    typealias PublisherType = PassthroughSubject<ContentViewModel, Never>
+
+    var didChange = PublisherType()
+    var willChange = PublisherType()
     
     // MARK: - Properties
     
