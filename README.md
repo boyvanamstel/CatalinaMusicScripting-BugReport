@@ -17,7 +17,7 @@ While Music.app uses a scripting interface very similar to iTunes, security scop
 </dict>
 ```
 
-Only library information (`com.apple.iTunes.library.read`) seems to be affected. Fetching track artwork for instance works as expected.
+Only library information (`com.apple.Music.library.read`) seems to be affected. Fetching track artwork for instance works as expected.
 
 ## Setup
 
