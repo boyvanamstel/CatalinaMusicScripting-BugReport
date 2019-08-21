@@ -11,8 +11,8 @@ While Music.app uses a scripting interface very similar to iTunes, security scop
 <dict>
 	<key>com.apple.Music</key>
 	<array>
-		<string>com.apple.iTunes.playback</string>
-		<string>com.apple.iTunes.library.read</string>
+		<string>com.apple.Music.playback</string>
+		<string>com.apple.Music.library.read</string>
 	</array>
 </dict>
 ```
