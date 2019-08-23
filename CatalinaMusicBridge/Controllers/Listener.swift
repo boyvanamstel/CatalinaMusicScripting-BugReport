@@ -34,7 +34,7 @@ class Listener {
             .default()
             .addObserver(self,
                          selector: #selector(handlePlayerStateChange(_:)),
-                         name: .iTunesPlayerInfo,
+                         name: .musicPlayerInfo,
                          object: nil)
 
         updatePlayerInfo()

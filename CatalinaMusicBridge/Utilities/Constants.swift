@@ -9,5 +9,5 @@
 import Foundation
 
 extension NSNotification.Name {
-    static let iTunesPlayerInfo = NSNotification.Name("com.apple.iTunes.playerInfo")
+    static let musicPlayerInfo = NSNotification.Name("com.apple.Music.playerInfo")
 }
