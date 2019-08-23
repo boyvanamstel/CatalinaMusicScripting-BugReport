@@ -9,24 +9,16 @@
 import SwiftUI
 import Combine
 
-class ContentViewModel: BindableObject {
-    typealias PublisherType = PassthroughSubject<ContentViewModel, Never>
+class ContentViewModel: ObservableObject {
 
-    var didChange = PublisherType()
-    var willChange = PublisherType()
-    
     // MARK: - Properties
     
-    var currentTrack: String {
-        return "\(playerInfo.artist) - \(playerInfo.title)"
-    }
-    var playerState: String {
-        return "\(playerInfo.state)"
-    }
+    @Published var currentTrack = ""
+    @Published var playerState = ""
     
     private var playerInfo: PlayerInfo {
         didSet {
-            didChange.send(self)
+            update(playerInfo)
         }
     }
 
@@ -37,8 +29,16 @@ class ContentViewModel: BindableObject {
     init(listener: Listener) {
         self.listener = listener
         self.playerInfo = listener.playerInfo
+        update(self.playerInfo)
         
         listener.didUpdatePlayerInfo = { self.playerInfo = $0 }
+    }
+
+    // MARK: - Player info
+
+    private func update(_ playerInfo: PlayerInfo) {
+        currentTrack = "\(playerInfo.artist) - \(playerInfo.title)"
+        playerState = "\(playerInfo.state)"
     }
 
 }
