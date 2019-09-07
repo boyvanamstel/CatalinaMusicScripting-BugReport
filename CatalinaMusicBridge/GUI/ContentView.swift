@@ -10,16 +10,36 @@ import SwiftUI
 
 struct ContentView : View {
     @EnvironmentObject var viewModel: ContentViewModel
+
+    private let foregroundColor = Color.white
+    private let backgroundColor = Color.accentColor.opacity(0.9)
     
     var body: some View {
-        VStack(alignment: .center, spacing: 20.0) {
-            Text("Play a track in Music.app")
-                .font(.title)
-            Text("\(viewModel.currentTrack)")
-            Text("State: \(viewModel.playerState)")
-                .font(.footnote)
+        ZStack {
+            Image(nsImage: viewModel.artwork)
+                .resizable()
+                .scaledToFill()
+            VStack(alignment: .center, spacing: 20.0) {
+                Text(viewModel.title)
+                    .font(.title)
+                    .padding()
+                    .foregroundColor(foregroundColor)
+                    .background(backgroundColor)
+                    .cornerRadius(5.0)
+                Text(viewModel.currentTrack)
+                    .padding()
+                    .foregroundColor(foregroundColor)
+                    .background(backgroundColor)
+                    .cornerRadius(5.0)
+                Text(viewModel.playerState)
+                    .font(.footnote)
+                    .padding()
+                    .foregroundColor(foregroundColor)
+                    .background(backgroundColor)
+                    .cornerRadius(5.0)
+            }
+            .frame(minWidth: 512.0, minHeight: 512.0)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 

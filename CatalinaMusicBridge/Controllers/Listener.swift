@@ -57,7 +57,8 @@ class Listener {
     private func updatePlayerInfo() {
         let song = fetchSong()
         let state = fetchPlayerState()
-        let playerInfo = PlayerInfo(state: state, artist: song.artist, title: song.title)
+        let artwork = fetchArtwork()
+        let playerInfo = PlayerInfo(state: state, artist: song.artist, title: song.title, artwork: artwork)
         self.playerInfo = playerInfo
 
         didUpdatePlayerInfo?(playerInfo)
@@ -107,6 +108,26 @@ end
         let state = PlayerInfo.State(rawValue: stateString) ?? .unknown
 
         return state
+    }
+
+    private func fetchArtwork() -> NSImage? {
+        var error: NSDictionary?
+        let source = """
+tell application "Music"
+set trackArtworks to artworks of current track
+if exists (every artwork) of current track
+data of artwork 1 of current track
+end if
+end tell
+"""
+
+        let script = NSAppleScript(source: source)
+        guard let output = script?.executeAndReturnError(&error) else {
+            print("Artwork error:\n\(error ?? [:])")
+            return nil
+        }
+
+        return NSImage(data: output.data)
     }
 
 }

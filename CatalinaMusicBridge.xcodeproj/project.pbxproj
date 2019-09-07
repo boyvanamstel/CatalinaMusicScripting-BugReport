@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		B53D9A2E22A6F44500912C72 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53D9A2D22A6F44500912C72 /* AppDelegate.swift */; };
 		B53D9A3022A6F44500912C72 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53D9A2F22A6F44500912C72 /* ContentView.swift */; };
-		B53D9A3222A6F44800912C72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B53D9A3122A6F44800912C72 /* Assets.xcassets */; };
 		B53D9A3522A6F44800912C72 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B53D9A3422A6F44800912C72 /* Preview Assets.xcassets */; };
 		B53D9A3822A6F44800912C72 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B53D9A3622A6F44800912C72 /* Main.storyboard */; };
 		B53D9A4122A7C15300912C72 /* Listener.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53D9A4022A7C15300912C72 /* Listener.swift */; };
@@ -17,6 +16,7 @@
 		B53D9A4522A7C99500912C72 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53D9A4422A7C99500912C72 /* ContentViewModel.swift */; };
 		B53D9A4722A7CC1400912C72 /* PlayerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53D9A4622A7CC1400912C72 /* PlayerInfo.swift */; };
 		B53D9A4D22A7D8D900912C72 /* NSWindow+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53D9A4C22A7D8D900912C72 /* NSWindow+Helpers.swift */; };
+		B5A981572323BD1900E9AAD8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B53D9A3122A6F44800912C72 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -180,8 +180,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B53D9A3822A6F44800912C72 /* Main.storyboard in Resources */,
+				B5A981572323BD1900E9AAD8 /* Assets.xcassets in Resources */,
 				B53D9A3522A6F44800912C72 /* Preview Assets.xcassets in Resources */,
-				B53D9A3222A6F44800912C72 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,6 +338,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "CatalinaMusicBridge/Preview\\ Content";
 				DEVELOPMENT_TEAM = RVZKP45394;
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = CatalinaMusicBridge/Info.plist;
@@ -360,6 +361,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "CatalinaMusicBridge/Preview\\ Content";
 				DEVELOPMENT_TEAM = RVZKP45394;
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = CatalinaMusicBridge/Info.plist;

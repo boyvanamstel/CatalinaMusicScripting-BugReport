@@ -12,9 +12,12 @@ import Combine
 class ContentViewModel: ObservableObject {
 
     // MARK: - Properties
-    
+
+    let title = "Play a track in Music.app"
+
     @Published var currentTrack = ""
     @Published var playerState = ""
+    @Published var artwork: NSImage!
     
     private var playerInfo: PlayerInfo {
         didSet {
@@ -38,7 +41,8 @@ class ContentViewModel: ObservableObject {
 
     private func update(_ playerInfo: PlayerInfo) {
         currentTrack = "\(playerInfo.artist) - \(playerInfo.title)"
-        playerState = "\(playerInfo.state)"
+        playerState = "State: \(playerInfo.state)"
+        artwork = playerInfo.artwork ?? NSImage(named: "DeniedAppIcon")!
     }
 
 }
