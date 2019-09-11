@@ -55,10 +55,11 @@ class Listener {
     }
 
     private func updatePlayerInfo() {
-        let song = fetchSong()
+        let artist = fetchArtist()
+        let name = fetchName()
         let state = fetchPlayerState()
         let artwork = fetchArtwork()
-        let playerInfo = PlayerInfo(state: state, artist: song.artist, title: song.title, artwork: artwork)
+        let playerInfo = PlayerInfo(state: state, artist: artist, name: name, artwork: artwork)
         self.playerInfo = playerInfo
 
         didUpdatePlayerInfo?(playerInfo)
@@ -66,30 +67,38 @@ class Listener {
 
     // MARK: - Scripts
 
-    private func fetchSong() -> (artist: String?, title: String?) {
+    private func fetchArtist() -> String? {
         var error: NSDictionary?
         let source = """
-property trackName : ""
-property trackArtist : ""
-tell application "Music"
-set trackName to name of current track
-set trackArtist to artist of current track
-end tell
-return {trackArtist, trackName}
-"""
-
+        tell application "Music"
+        get artist of current track
+        end tell
+        """
         let script = NSAppleScript(source: source)
         guard let output = script?.executeAndReturnError(&error) else {
-            print("Track Info error:\n\(error ?? [:])")
-            return (nil, nil)
+            print("Track name error:\n\(error ?? [:])")
+            return nil
         }
 
-        let artist = output.atIndex(1)?.stringValue
-        let title = output.atIndex(2)?.stringValue
-
-        return (artist: artist, title: title)
+        return output.stringValue
     }
-    
+
+    private func fetchName() -> String? {
+        var error: NSDictionary?
+        let source = """
+        tell application "Music"
+        get name of current track
+        end tell
+        """
+        let script = NSAppleScript(source: source)
+        guard let output = script?.executeAndReturnError(&error) else {
+            print("Track name error:\n\(error ?? [:])")
+            return nil
+        }
+
+        return output.stringValue
+    }
+
     private func fetchPlayerState() -> PlayerInfo.State {
         var error: NSDictionary?
         let source = """

@@ -40,7 +40,7 @@ class ContentViewModel: ObservableObject {
     // MARK: - Player info
 
     private func update(_ playerInfo: PlayerInfo) {
-        currentTrack = "\(playerInfo.artist) - \(playerInfo.title)"
+        currentTrack = "\(playerInfo.artist) - \(playerInfo.name)"
         playerState = "State: \(playerInfo.state)"
         artwork = playerInfo.artwork
     }
