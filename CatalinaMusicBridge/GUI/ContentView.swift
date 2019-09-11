@@ -16,9 +16,11 @@ struct ContentView : View {
     
     var body: some View {
         ZStack {
-            Image(nsImage: viewModel.artwork)
-                .resizable()
-                .scaledToFill()
+            viewModel.artwork.map {
+                Image(nsImage: $0)
+                    .resizable()
+                    .scaledToFill()
+            }
             VStack(alignment: .center, spacing: 20.0) {
                 Text(viewModel.title)
                     .font(.title)

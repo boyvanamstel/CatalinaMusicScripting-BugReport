@@ -17,7 +17,7 @@ class ContentViewModel: ObservableObject {
 
     @Published var currentTrack = ""
     @Published var playerState = ""
-    @Published var artwork: NSImage!
+    @Published var artwork: NSImage?
     
     private var playerInfo: PlayerInfo {
         didSet {
@@ -42,7 +42,7 @@ class ContentViewModel: ObservableObject {
     private func update(_ playerInfo: PlayerInfo) {
         currentTrack = "\(playerInfo.artist) - \(playerInfo.title)"
         playerState = "State: \(playerInfo.state)"
-        artwork = playerInfo.artwork ?? NSImage(named: "DeniedAppIcon")!
+        artwork = playerInfo.artwork
     }
 
 }
