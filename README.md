@@ -46,3 +46,9 @@ Also note that the player state _did_ update appropriately.
 
 Notice that the track information gets properly displayed:
 ![A screenshot of the app window showing track information](Screenshots/track-info.png)
+
+## Updates
+
+### September 11th, 2019
+
+* Discovered that the issue is caused by `name` of `current track`. The `artist`, `artwork` and `player state` work as expected (for local tracks at least).
